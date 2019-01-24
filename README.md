@@ -16,7 +16,7 @@ the two repository and the modifications to other plugins(chain_plugin and net_p
 
 These two contracts are developed entirely on eosio.cdt, so you can compile them using eosio.cdt or bos.cdt,
 bos.cdt only adds some contract interfaces, the existing interface of eosio.cdt has not been changed.
-eosio.cdt and bos.cdt use different versions, so you should use following command to compile:
+eosio.cdt and bos.cdt use different versions, so you should use following command to compile:  
 if your host is installed eosio.cdt, compile with the following command  
 `$ build.sh eosio.cdt`  
 if your host is installed bos.cdt, compile with the following command  
