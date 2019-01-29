@@ -12,12 +12,6 @@ print_usage(){
 cdt_version=1.4
 
 
-SEDIOPTION=-i
-ARCH=$( uname )
-if ! [ "$ARCH" == "Linux" ]; then
-SEDIOPTION="$SEDIOPTION '' "
-fi
-
 if [ "$1" == "bos.cdt" ];then
 cdt_version=2.0.1
 elif [ "$1" == "eosio.cdt" ];then
@@ -26,8 +20,16 @@ else
     print_usage && exit 0
 fi
 
-sed ${SEDIOPTION} 's/set(EOSIO_CDT_VERSION_MIN.*/set(EOSIO_CDT_VERSION_MIN "'${cdt_version}'")/g'           ./CMakeLists.txt
-sed ${SEDIOPTION}  's/set(EOSIO_CDT_VERSION_SOFT_MAX.*/set(EOSIO_CDT_VERSION_SOFT_MAX "'${cdt_version}'")/g' ./CMakeLists.txt
+ARCH=$( uname )
+if  [ "$ARCH" == "Linux" ]; then
+sed -i 's/set(EOSIO_CDT_VERSION_MIN.*/set(EOSIO_CDT_VERSION_MIN "'${cdt_version}'")/g'           ./CMakeLists.txt
+sed -i 's/set(EOSIO_CDT_VERSION_SOFT_MAX.*/set(EOSIO_CDT_VERSION_SOFT_MAX "'${cdt_version}'")/g' ./CMakeLists.txt
+else
+sed -i '' 's/set(EOSIO_CDT_VERSION_MIN.*/set(EOSIO_CDT_VERSION_MIN "'${cdt_version}'")/g'           ./CMakeLists.txt
+sed -i '' 's/set(EOSIO_CDT_VERSION_SOFT_MAX.*/set(EOSIO_CDT_VERSION_SOFT_MAX "'${cdt_version}'")/g' ./CMakeLists.txt
+fi
+
+
 
 
 printf "\t=========== Building eosio.contracts ===========\n\n"
